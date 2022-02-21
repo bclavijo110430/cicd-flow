@@ -15,7 +15,7 @@ jobs:
     - name: Build the tagged Docker image
       run: docker build . --file Dockerfile --tag  bclavijo110430/cyberexpress:${{steps.vars.outputs.tag}}
     - name: Push the tagged Docker image
-      run: docker push registry/debq:${{steps.vars.outputs.tag}}
+      run: docker push bclavijo110430/cyberexpress:${{steps.vars.outputs.tag}}
     - name: Build the latest Docker image
       run: docker build . --file Dockerfile --tag bclavijo110430/cyberexpress:latest
     - name: Push the latest Docker image
