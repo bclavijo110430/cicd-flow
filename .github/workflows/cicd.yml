@@ -20,3 +20,13 @@ jobs:
       run: docker build . --file Dockerfile --tag bclavijo110430/cyberexpress:latest
     - name: Push the latest Docker image
       run: docker push bclavijo110430/cyberexpress:latest
+      
+    - name: Deploy to Heroku #set the whatever name you want to this step
+      id: heroku
+      uses: snithyanantham/docker-compose-multiple-apps-heroku-deploy@v1.0  # use the latest version of the action
+      with:
+          email: ${{ secrets.HEROKU_EMAIL }} # your heroku email
+          api_key: ${{ secrets.HEROKU_API_KEY }} # your  heroku api key
+          docker_compose_file: './docker-compose.yml' # set the path to the folder where the docker-compose file is located
+          heroku_apps: '[{"i bclavijo110430/cyberexpress:latest":"app1","cicdprueba":"app1","apptype":"web"}]' # List of Docker Image name, Heroku app and Heroku app type
+
