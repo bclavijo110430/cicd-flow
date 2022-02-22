@@ -23,7 +23,7 @@ spec:
       - name: cyberexp-app
         image: bclavijo110430/cyberexpress:latest
         ports:
-        - containerPort: 80
+        - containerPort: 8000
         resources:
           requests:
             cpu: 100m
@@ -33,13 +33,12 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cyberexp-app-service
+  name: cyberexp-app
 spec:
-  type: LoadBalancer
-  ports:
-    - name: http
-      protocol: TCP
-      port: 8000
-      targetPort: 80
+  type: NodePort
+  ports:  
+     - port: 8000
+       nodePort: 32202
+
   selector:
     app: cyberexp-app
