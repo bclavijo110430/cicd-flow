@@ -1,8 +1,8 @@
 version: '3'
 services:
   web:
-    image:  bclavijo110430/cyberexpress:latest
-    command: python manage.py runserver 0.0.0.0:8000
+    image:   bclavijo110430/cyberexpress:latest
+    command: python /code/manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/code
     ports:
