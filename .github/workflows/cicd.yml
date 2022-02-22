@@ -14,11 +14,11 @@ jobs:
       id: vars
       run: echo ::set-output name=tag::$(echo ${GITHUB_REF:10})
     - name: Build the tagged Docker image
-      run: docker build . --file Dockerfile --tag  bclavijo110430/cyberexpress:$GITHUB_RUN_ID
+      run: docker build . --file Dockerfile --tag  bclavijo110430/cyberexpress:(git rev-parse --verify HEAD)
     - name: Push the tagged Docker image
       run: docker push bclavijo110430/cyberexpress:$GITHUB_RUN_ID
     - name: Build the latest Docker image
-      run: docker build . --file Dockerfile --tag bclavijo110430/cyberexpress:latest
+      run: docker build . --file Dockerfile --tag bclavijo110430/cyberexpress:(git rev-parse --verify HEAD)
     - name: Push the latest Docker image
       run: docker push bclavijo110430/cyberexpress:latest
       
