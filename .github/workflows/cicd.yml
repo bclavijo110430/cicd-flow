@@ -21,7 +21,7 @@ jobs:
       run: docker push bclavijo110430/cyberexpress:${{ env.RELEASE_VERSION }}
     - name: Build the latest Docker image
       run: docker build . --file Dockerfile --tag bclavijo110430/cyberexpress:latest
-    - name: Push the latest Docker image
+    - name: Push the latest Docker imag
       run: docker push bclavijo110430/cyberexpress:latest
       
     - name: Start Deployment
