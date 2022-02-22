@@ -1,0 +1,45 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cyberexp-app
+  labels:
+    app: cyberexp-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: cyberexp-app
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 1
+  minReadySeconds: 5
+  template:
+    metadata:
+      labels:
+        app: cyberexp-app
+    spec:
+      containers:
+      - name: cyberexp-app
+        image: bclavijo110430/cyberexpress:latest
+        ports:
+        - containerPort: 80
+        resources:
+          requests:
+            cpu: 100m
+          limits:
+            cpu: 100m
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cyberexp-app-service
+spec:
+  type: LoadBalancer
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8000
+      targetPort: 80
+  selector:
+    app: cyberexp-app
