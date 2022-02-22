@@ -29,6 +29,7 @@ jobs:
     - uses: Azure/k8s-set-context@v2
       with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    - name: deploy cluster
     - uses: Azure/k8s-deploy@v1.4
       with:
           action: deploy
