@@ -25,12 +25,13 @@ jobs:
       run: docker push bclavijo110430/cyberexpress:latest
       
     - name: Start Deployment
-      uses: actions/checkout@v1    
+      #uses: actions/checkout@v1    
     - uses: Azure/k8s-set-context@v2
       with:
           kubeconfig: ${{ secrets.KUBE_CONFIG }}
+    
     - name: deploy cluster
-    - uses: Azure/k8s-deploy@v1.4
+      uses: Azure/k8s-deploy@v1.4
       with:
           action: deploy
           manifests: |
