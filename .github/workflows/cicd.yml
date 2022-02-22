@@ -33,7 +33,7 @@ jobs:
            ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
            deployment_mode: docker-compose
            copy_stack_file: true
-           deploy_path: /home/root/services
+           deploy_path: /root/services
            stack_file_name: docker-compose.yaml
            pull_images_first: true
            keep_files: 3
