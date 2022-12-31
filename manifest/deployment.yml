@@ -5,13 +5,13 @@ metadata:
   labels:
     app: cyberexp-app
 spec:
-  replicas: 1
+  replicas: 5
   selector:
     matchLabels:
       app: cyberexp-app
   strategy:
     rollingUpdate:
-      maxSurge: 1
+      maxSurge: 5
       maxUnavailable: 1
   minReadySeconds: 5
   template:
@@ -42,3 +42,16 @@ spec:
 
   selector:
     app: cyberexp-app
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cyberexp-app
+spec:
+  selector:
+    app: cyberexp-app
+  ports:
+    - port: 8000
+      targetPort: 32203
+  type: LoadBalancer   
