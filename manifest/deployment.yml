@@ -53,5 +53,5 @@ spec:
     app: cyberexp-app
   ports:
     - port: 8000
-      targetPort: 32300
+      targetPort: 8000
   type: LoadBalancer   
