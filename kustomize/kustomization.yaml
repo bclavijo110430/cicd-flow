@@ -3,4 +3,3 @@ kind: Kustomization
 resources:
   - create_namespace.yml
   - deployment.yml
-  - service.yml
