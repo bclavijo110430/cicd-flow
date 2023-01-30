@@ -2,7 +2,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: pp-cyberexp-app
-  namespace: cyberexpert
+  namespace: ppcyberexpert
   labels:
     app: pp-cyberexp-app
 spec:
