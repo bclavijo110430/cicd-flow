@@ -1,15 +1,15 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: cyberexp-app
+  name: pp-cyberexp-app
   namespace: cyberexpert
   labels:
-    app: cyberexp-app
+    app: pp-cyberexp-app
 spec:
   replicas: 3
   selector:
     matchLabels:
-      app: cyberexp-app
+      app: pp-cyberexp-app
   strategy:
     rollingUpdate:
       maxSurge: 5
@@ -18,10 +18,10 @@ spec:
   template:
     metadata:
       labels:
-        app: cyberexp-app
+        app: pp-cyberexp-app
     spec:
       containers:
-      - name: cyberexp-app
+      - name: pp-cyberexp-app
         image: bclavijo110430/cyberexpress:latest
         ports:
         - containerPort: 8000
@@ -34,7 +34,7 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cyberexp-app
+  name: pp-cyberexp-app
 spec:
   type: NodePort
   ports:  
@@ -42,7 +42,7 @@ spec:
        nodePort: 32202
 
   selector:
-    app: cyberexp-app
+    app: pp-cyberexp-app
 
 #---
 #apiVersion: v1
