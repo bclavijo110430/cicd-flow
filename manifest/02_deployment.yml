@@ -39,7 +39,7 @@ spec:
   type: NodePort
   ports:  
      - port: 8000
-       nodePort: 32202
+       nodePort: 32203
 
   selector:
     app: pp-cyberexp-app
