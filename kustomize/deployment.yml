@@ -18,10 +18,10 @@ spec:
   template:
     metadata:
       labels:
-        app: cyberexp-app
+        app: cyberexp-app-preprod
     spec:
       containers:
-      - name: cyberexp-app
+      - name: cyberexp-app-preprod
         image: bclavijo110430/cyberexpress:latest
         ports:
         - containerPort: 8000
@@ -34,15 +34,15 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: cyberexp-app
+  name: cyberexp-app-preprod
 spec:
   type: NodePort
   ports:  
      - port: 8000
-       nodePort: 32202
+       nodePort: 32203
 
   selector:
-    app: cyberexp-app
+    app: cyberexp-app-preprod
 
 #---
 #apiVersion: v1
