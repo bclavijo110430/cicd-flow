@@ -6,7 +6,7 @@ metadata:
   labels:
     app: pp-cyberexp-app
 spec:
-  replicas: 1
+  replicas: 4
   selector:
     matchLabels:
       app: pp-cyberexp-app
