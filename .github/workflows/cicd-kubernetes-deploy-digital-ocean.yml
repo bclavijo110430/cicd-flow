@@ -1,8 +1,8 @@
 name: Publish Docker image
-on:
-  push:
-    tags:
-      - "v*.*.*"
+#on:
+#  push:
+#    tags:
+#      - "v*.*.*"
 jobs: 
   build: 
     runs-on: ubuntu-latest
@@ -24,18 +24,31 @@ jobs:
     - name: Push the latest Docker imag
       run: docker push bclavijo110430/cyberexpress:latest
       
-    - name: Start Deployment
-      #uses: actions/checkout@v1    
-      uses: wshihadeh/docker-deployment-action@v1
+    
+     
+    - name: Install doctl
+      uses: digitalocean/action-doctl@v2
       with:
-           remote_docker_host: root@157.245.132.1
-           ssh_private_key: ${{ secrets.DOCKER_SSH_PRIVATE_KEY }}
-           ssh_public_key: ${{ secrets.DOCKER_SSH_PUBLIC_KEY }}
-           deployment_mode: docker-compose
-           copy_stack_file: true
-           deploy_path: /root/services
-           stack_file_name: docker-compose.yaml
-           pull_images_first: true
-           keep_files: 3
-           args: -p test up -d
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+    #- name: Replace Environment Variables
+     # uses: danielr1996/envsubst-action@1.0.0
+    #  env:
+  #        PORT: ${{ secrets.PORT }}
+    #      DB_HOST: ${{ secrets.DB_HOST }}
+    #      DB_USERNAME: ${{ secrets.DB_USERNAME }}
+    #      DB_PORT: ${{ secrets.DB_PORT }}
+    #      DB_PASSWORD: ${{ secrets.DB_PASSWORD }}
+   #       DB_NAME: ${{ secrets.DB_NAME }}
+   #   with:
+    #      input: deployment.yml
+    #      output: deploy.yml
 
+    - name: Save DigitalOcean kubeconfig
+      run: doctl kubernetes cluster kubeconfig save $CLUSTER_NAME
+      env: 
+          CLUSTER_NAME: ${{ secrets.CLUSTER_NAME }}
+    - name: Deploy to Kubernetes
+      run: kubectl apply -f manifest/deployment.yml
+
+    - name: Verify deployment
+      run: kubectl rollout status deployment/cyberexp-app
