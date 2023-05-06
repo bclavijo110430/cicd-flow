@@ -57,8 +57,7 @@ jobs:
     # Build the Docker image
     - name: Build
       run: |-
-        echo 
-        docker build .  --file ./Dockerfile --tag "gcr.io/${{ env.GKE_PROJECT }}/${{ env.IMAGE }}:$GITHUB_SHA" 
+        docker build .  --file ./Dockerfile --tag "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA" 
 
        
          
@@ -66,7 +65,7 @@ jobs:
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
-        docker push "gcr.io/${{ env.GKE_PROJECT }}/${{ env.IMAGE }}:$GITHUB_SHA"
+        docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA"
 #
 #    # Set up kustomize
 #    - name: Set up Kustomize
