@@ -15,9 +15,9 @@ on:
       - main
 
 env:
-  PROJECT_ID: ${{ secrets.PROJECT_ID}} #id proyecto 
-  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}  #nombre de cluster
-  GKE_ZONE: ${{ secrets.GKE_ZONE }}   # Add your cluster zone here.
+ # PROJECT_ID: ${{ secrets.PROJECT_ID}} #id proyecto 
+ # GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}  #nombre de cluster
+ # GKE_ZONE: ${{ secrets.GKE_ZONE }}   # Add your cluster zone here.
   DEPLOYMENT_NAME: ${{ vars.DEPLOYMENT_NAME }} # Add your deployment name here.
   IMAGE: ${{ vars.IMAGE }}
 
@@ -47,7 +47,9 @@ jobs:
       with:
         cluster_name: ${{ secrets.GKE_CLUSTER }}
         location: ${{ secrets.GKE_ZONE }}
+        project_id: ${{ secrets.GKE_PROJECT }}
         credentials: ${{ secrets.GKE_SA_KEY }}
+
 
     # Build the Docker image
     - name: Build
