@@ -15,7 +15,7 @@ on:
       - main
 
 env:
- # PROJECT_ID: ${{ secrets.PROJECT_ID}} #id proyecto 
+  PROJECT_ID: ${{ secrets.GKE_PROJECT}} #id proyecto 
  # GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}  #nombre de cluster
  # GKE_ZONE: ${{ secrets.GKE_ZONE }}   # Add your cluster zone here.
   DEPLOYMENT_NAME: ${{ vars.DEPLOYMENT_NAME }} # Add your deployment name here.
@@ -55,19 +55,18 @@ jobs:
 
     # Build the Docker image
     - name: Build
-      env:
-        PROJECT_ID: ${{ secrets.GKE_PROJECT }}
       run: |-
         docker build \
-          --tag "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA" \
+          --file ./Dockerfile
+          --tag "gcr.io/${{ env.GKE_PROJECT }}/${{ env.IMAGE }}:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
-          --file ./Dockerfile
+          .
 
-#    # Push the Docker image to Google Container Registry
-#    - name: Publish
-#      run: |-
-#        docker push "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA"
+    # Push the Docker image to Google Container Registry
+    - name: Publish
+      run: |-
+        docker push "gcr.io/${{ env.GKE_PROJECT }}/${{ env.IMAGE }}:$GITHUB_SHA"
 #
 #    # Set up kustomize
 #    - name: Set up Kustomize
