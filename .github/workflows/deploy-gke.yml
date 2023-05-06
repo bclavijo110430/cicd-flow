@@ -66,9 +66,9 @@ jobs:
     - name: Publish
       run: |-
         docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA"
-#
+
 #    # Set up kustomize
-      name: Setup Kustomize
+    - name: Setup Kustomize
       run: |-
        
         kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA --path ./kustomize
