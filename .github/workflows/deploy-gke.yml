@@ -57,7 +57,7 @@ jobs:
     - name: Build
       run: |-
         docker build . \
-          --file ./Dockerfile \
+          --file ./Dockerfile 
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           --tag "gcr.io/${{ env.GKE_PROJECT }}/${{ env.IMAGE }}:$GITHUB_SHA" 
