@@ -15,11 +15,11 @@ on:
       - main
 
 env:
-  PROJECT_ID: ${{ secrets.PROJECT_ID }} #id proyecto 
-  GKE_CLUSTER: ${{secrets.GKE_CLUSTER }}  #nombre de cluster
-  GKE_ZONE: ${{secrets.GKE_ZONE }}   # Add your cluster zone here.
-  DEPLOYMENT_NAME: gke-test # Add your deployment name here.
-  IMAGE: ${{ vars.IMAGE}}
+  PROJECT_ID: ${{ secrets.PROJECT_ID}} #id proyecto 
+  GKE_CLUSTER: ${{ secrets.GKE_CLUSTER }}  #nombre de cluster
+  GKE_ZONE: ${{ secrets.GKE_ZONE }}   # Add your cluster zone here.
+  DEPLOYMENT_NAME: ${{ vars.DEPLOYMENT_NAME }} # Add your deployment name here.
+  IMAGE: ${{ vars.IMAGE }}
 
 jobs:
   setup-build-publish-deploy:
@@ -45,8 +45,8 @@ jobs:
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@db150f2cc60d1716e61922b832eae71d2a45938f
       with:
-        cluster_name: ${{ env.GKE_CLUSTER }}
-        location: ${{ env.GKE_ZONE }}
+        cluster_name: ${{ secrets.GKE_CLUSTER }}
+        location: ${{ secrets.GKE_ZONE }}
         credentials: ${{ secrets.GKE_SA_KEY }}
 
     # Build the Docker image
