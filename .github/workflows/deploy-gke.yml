@@ -55,9 +55,11 @@ jobs:
 
     # Build the Docker image
     - name: Build
+      env:
+        PROJECT_ID: ${{ secrets.PROJECT_ID}}
       run: |-
         docker build \
-          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+          --tag "gcr.io/${{ env.PROJECT_ID}}/${{ env.IMAGE}}:$GITHUB_SHA" \
           --build-arg GITHUB_SHA="$GITHUB_SHA" \
           --build-arg GITHUB_REF="$GITHUB_REF" \
           --file ./Dockerfile
