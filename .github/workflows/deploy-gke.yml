@@ -51,17 +51,17 @@ jobs:
         location: ${{ vars.GKE_ZONE }}
  #       project_id: ${{ secrets.GKE_PROJECT }}
  #       credentials: ${{ secrets.GKE_SA_KEY }}
-#
-#
-#    # Build the Docker image
-#    - name: Build
-#      run: |-
-#        docker build \
-#          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
-#          --build-arg GITHUB_SHA="$GITHUB_SHA" \
-#          --build-arg GITHUB_REF="$GITHUB_REF" \
-#          --file ./Dockerfile
-#
+
+
+    # Build the Docker image
+    - name: Build
+      run: |-
+        docker build \
+          --tag "gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA" \
+          --build-arg GITHUB_SHA="$GITHUB_SHA" \
+          --build-arg GITHUB_REF="$GITHUB_REF" \
+          --file ./Dockerfile
+
 #    # Push the Docker image to Google Container Registry
 #    - name: Publish
 #      run: |-
