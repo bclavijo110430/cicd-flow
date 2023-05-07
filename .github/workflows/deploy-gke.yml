@@ -73,8 +73,9 @@ jobs:
         cp ./kustomize/kustomization.yaml /tmp/kustomization.yaml
         envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1)) < ./tmp/kustomization.yaml > ./kustomize/kustomization.yaml
         cd ./kustomize
-        kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA 
         kustomize build .
+#  kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA 
+       
 
 
     # Deploy the Docker image to the GKE cluster
