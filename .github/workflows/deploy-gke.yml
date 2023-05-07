@@ -70,7 +70,7 @@ jobs:
 #    # Set up kustomize
     - name: Setup Kustomize
       run: |-
-       
+        cd ./kustomize
         kustomize edit set image deployimage=gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA ./kustomize/kustomization.yaml 
         kustomize build . 
 
