@@ -3,6 +3,8 @@ kind: Kustomization
 resources:
   - create_namespace.yml
   - deployment.yml
+
 images:
- name:  gcr.io/PROJECT_ID/IMAGE
- newtag: TAG
+- name: imagedeploy
+  newName: gcr.io/$PROJECT_ID/$IMAGE
+  newTag: $GITHUB_SHA
