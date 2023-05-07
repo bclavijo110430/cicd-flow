@@ -71,8 +71,8 @@ jobs:
     - name: Setup Kustomize
       run: |-
         cd ./kustomize
-        kustomize edit set image deployimage=gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA ./kustomize/kustomization.yaml 
-        kustomize build . 
+        kustomize edit set image deployimage=gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/$PROJECT_ID/$IMAGE:$GITHUB_SHA 
+        kustomize build ./kustomize
 
 
     # Deploy the Docker image to the GKE cluster
