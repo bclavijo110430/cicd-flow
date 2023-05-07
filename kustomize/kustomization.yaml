@@ -4,4 +4,5 @@ resources:
   - create_namespace.yml
   - deployment.yml
 images:
- name: gcr.io/PROJECT_ID/IMAGE
+ name: image gcr.io/PROJECT_ID
+ newtag: IMAGE
