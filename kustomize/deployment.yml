@@ -22,7 +22,7 @@ spec:
     spec:
       containers:
       - name: cyberexp-app
-        image: gcr.io/my-project/my-image:latest
+        image: gcr.io/PROJECT_ID/IMAGE:latest
         ports:
         - containerPort: 8000
         resources:
