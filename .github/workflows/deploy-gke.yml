@@ -71,7 +71,7 @@ jobs:
     - name: Setup Kustomize
       run: |-
         cd ./kustomize
-        kustomize edit set image deployimage=gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA 
+        kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA 
         kustomize build .
 
 
