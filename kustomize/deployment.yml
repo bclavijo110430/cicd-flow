@@ -49,6 +49,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: cyberexp-app
+  namespace: cyberexpert
 spec:
   selector:
     app: cyberexp-app
