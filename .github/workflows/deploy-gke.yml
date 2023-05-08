@@ -67,7 +67,7 @@ jobs:
       run: |-
         docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA"
 
-#    # Set up kustomize and deploy
+#    # Set up kustomize and deploy test1
     - name: deploy procces
       run: |-
         cp ./kustomize/kustomization.yaml /tmp/kustomization.yaml
