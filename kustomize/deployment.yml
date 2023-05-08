@@ -6,7 +6,7 @@ metadata:
   labels:
     app: cyberexp-app
 spec:
-  replicas: 18
+  replicas: 14
   selector:
     matchLabels:
       app: cyberexp-app
