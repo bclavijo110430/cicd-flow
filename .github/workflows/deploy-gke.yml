@@ -68,7 +68,7 @@ jobs:
         docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA"
 
 #    # Set up kustomize and deploy test1
-    - name: deploy procces
+    - name: deploy process
       run: |-
         cp ./kustomize/kustomization.yaml /tmp/kustomization.yaml
         envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < /tmp/kustomization.yaml > ./kustomize/kustomization.yaml      
@@ -78,7 +78,7 @@ jobs:
         kubectl -n cyberexpert get services -o wide
 
 
-#  kustomize edit set image gcr.io/PROJECT_ID/IMAGE:TAG=gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA 
+
        
 
 
