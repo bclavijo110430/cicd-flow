@@ -68,13 +68,13 @@ jobs:
         docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA"
 
 #    # Set up kustomize and deploy
-    - name: Setup Kustomize
+    - name: deploy procces
       run: |-
         cp ./kustomize/kustomization.yaml /tmp/kustomization.yaml
         envsubst "$(printf '${%s} ' $(env | cut -d'=' -f1))" < /tmp/kustomization.yaml > ./kustomize/kustomization.yaml      
         cd ./kustomize
         kustomize build . | kubectl apply -f -
-        kubectl rollout status deployment/$DEPLOYMENT_NAME 
+        kubectl rollout status deployment/$DEPLOYMENT_NAME -n cyberexpert
         kubectl -n cyberexpert get services -o wide
 
 
