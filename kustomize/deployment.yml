@@ -31,28 +31,28 @@ spec:
           limits:
             cpu: 100m
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: cyberexp-app
-spec:
-  type: NodePort
-  ports:  
-     - port: 8000
-       nodePort: 32202
-
-  selector:
-    app: cyberexp-app
-
-#---
 #apiVersion: v1
 #kind: Service
 #metadata:
 #  name: cyberexp-app
 #spec:
+#  type: NodePort
+#  ports:  
+#     - port: 8000
+#       nodePort: 32202
+#
 #  selector:
 #    app: cyberexp-app
-#  ports:
-#    - port: 8000
-#      targetPort: 8000
-#  type: LoadBalancer   
+
+#---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cyberexp-app
+spec:
+  selector:
+    app: cyberexp-app
+  ports:
+    - port: 8000
+      targetPort: 8000
+  type: LoadBalancer   
