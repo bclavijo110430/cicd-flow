@@ -1,12 +1,3 @@
-# Este flujo de trabajo usa acciones que no GitHub no certifica.
-# Estas las proporcionan entidades terceras y las gobiernan
-# condiciones de servicio, políticas de privacidad y documentación de soporte
-# en línea.
-
-# GitHub recomienda anclar acciones a un SHA de confirmación.
-# Para obtener una versión más reciente, debes actualizar el SHA.
-# También puedes hacer referencia a una etiqueta o rama, pero la acción puede cambiar sin ninguna advertencia.
-
 name: Build and Deploy to GKE
 
 on:
@@ -27,48 +18,40 @@ jobs:
     environment: prodgke
 
     steps:
+    # Clone reposiory 
     - name: Checkout
       uses: actions/checkout@v3
-
+    # auth google provider
     - name: auth google 
       id: 'auth'
       uses: 'google-github-actions/auth@v1'
       with:
        credentials_json: ${{ secrets.GKE_SA_KEY }}
 
-       
+    # install SDK google cloud and setup cluster       
     - name: 'Set up Cloud SDK and set up cluster'
       uses: 'google-github-actions/setup-gcloud@v1'  
     - run: |-
         gcloud container clusters create  ${{ vars.GKE_CLUSTER }} --machine-type ${{ vars.GKE_MACHINE_TYPE }} --num-nodes ${{ vars.GKE_NUM_NODES }} --zone ${{ vars.GKE_ZONE }}
         gcloud --quiet auth configure-docker
 
-         
-
-
     # Get the GKE credentials so we can deploy to the cluster
     - uses: google-github-actions/get-gke-credentials@v1
       with:
         cluster_name:  ${{ vars.GKE_CLUSTER }}
         location: ${{ vars.GKE_ZONE }}
- #       project_id: ${{ secrets.GKE_PROJECT }}
- #       credentials: ${{ secrets.GKE_SA_KEY }}
-
 
     # Build the Docker image
     - name: Build
       run: |-
         docker build .  --file ./Dockerfile --tag "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA" 
 
-          
-         
-
     # Push the Docker image to Google Container Registry
     - name: Publish
       run: |-
         docker push "gcr.io/${{ env.PROJECT_ID }}/${{ env.IMAGE }}:$GITHUB_SHA"
 
-#    # Set up kustomize and deploy test1
+    # Set up kustomize and deploy test1
     - name: deploy process
       run: |-
         cp ./kustomize/kustomization.yaml /tmp/kustomization.yaml
@@ -80,12 +63,12 @@ jobs:
         sleep 50s
         kubectl -n cyberexpert  get  svc cyberexp-app -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
-
+    # testing endpoint
     - name: step of  testing endpoint
       run: |-
         sleep 200s
         exit 
-
+    # delete infra and deploy after testing 
     - name: clean process
       run: |-
         gcloud container clusters delete  ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GKE_ZONE }} --quiet      
