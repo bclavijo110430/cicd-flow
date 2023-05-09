@@ -41,7 +41,7 @@ jobs:
       uses: 'google-github-actions/setup-gcloud@v1'
     
     - run: |-
-        gcloud config set project ${{ env.PROJECT_ID }}
+        gcloud config set project "${{ env.PROJECT_ID }}"
         gcloud container clusters create  ${{ vars.GKE_CLUSTER }} --machine-type ${{ vars.GKE_MACHINE_TYPE }} --num-nodes ${{ vars.GKE_NUM_NODES }} --zone ${{ vars.GKE_ZONE }}
         gcloud --quiet auth configure-docker
 
