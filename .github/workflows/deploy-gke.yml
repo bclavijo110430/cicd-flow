@@ -88,4 +88,4 @@ jobs:
 
     - name: clean 
       run: |-
-        gcloud container clusters delete  ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GKE_ZONE }}--quiet      
+        gcloud container clusters delete  ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GKE_ZONE }} --quiet      
