@@ -81,11 +81,11 @@ jobs:
         kubectl -n cyberexpert  get  svc cyberexp-app -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
 
-    - name: sleep for tenting
+    - name: step of  testing endpoint
       run: |-
         sleep 200s
         exit 
 
-    - name: clean 
+    - name: clean process
       run: |-
         gcloud container clusters delete  ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GKE_ZONE }} --quiet      
