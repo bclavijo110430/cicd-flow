@@ -6,15 +6,15 @@ metadata:
   labels:
     app: cyberexp-app
 spec:
-  replicas: 14
+  replicas: 3
   selector:
     matchLabels:
       app: cyberexp-app
   strategy:
     rollingUpdate:
-      maxSurge: 5
+      maxSurge: 2
       maxUnavailable: 1
-  minReadySeconds: 5
+  minReadySeconds: 8
   template:
     metadata:
       labels:
