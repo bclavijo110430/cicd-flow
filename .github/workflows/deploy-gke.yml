@@ -73,7 +73,7 @@ jobs:
         sleep 200s
         exit 
 
-    - name: limpieza de recursos 
+    - name: Clean Up GKE rosources
       run: |-
          # elimina el cluster GKE 
          gcloud container clusters delete  ${{ vars.GKE_CLUSTER }} --zone ${{ vars.GKE_ZONE }} --quiet
