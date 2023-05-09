@@ -77,7 +77,8 @@ jobs:
         kustomize build . | kubectl apply -f -
         kubectl rollout status deployment/$DEPLOYMENT_NAME -n cyberexpert
         kubectl -n cyberexpert get services -o wide
-        kubectl get svc -l app=cyberexp-app -o jsonpath='{.items[0].status.loadBalancer.ingress[0].ip}' --wait=true
+        sleep 50s
+        kubectl -n cyberexpert  get  svc cyberexp-app -o jsonpath='{.status.loadBalancer.ingress[0].ip}'
 
 
     - name: sleep for tenting
