@@ -40,7 +40,6 @@ jobs:
     - name: 'Set up Cloud SDK and set up cluster'
       uses: 'google-github-actions/setup-gcloud@v1'  
     - run: |-
-        gcloud config set project cicd-385820
         gcloud container clusters create  ${{ vars.GKE_CLUSTER }} --machine-type ${{ vars.GKE_MACHINE_TYPE }} --num-nodes ${{ vars.GKE_NUM_NODES }} --zone ${{ vars.GKE_ZONE }}
         gcloud --quiet auth configure-docker
 
