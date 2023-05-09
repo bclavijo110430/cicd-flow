@@ -1,3 +1,11 @@
 # cicdtest
 
-Flujo de ci/cd aplicacion django. Aplicado para host docker  o  kubernetes cluster Digital Ocean
+Flujo de ci/cd aplicacion django. 
+
+deploy disponible en:
+
+docker-compose
+aks
+gke
+DIGITALOCEAN KUBERNETES
+
